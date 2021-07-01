@@ -19,8 +19,7 @@ steps:
       bundle exec fastlane build_for_testing
       echo "--- 🗜 Zip Build Products"
       tar -cf build-products.tar DerivedData/Build/Products/
-    artifact_paths:
-      - build-products.tar
+      buildkite-agent artifact upload build-products.tar
 
   #################
   # Run Unit Tests
