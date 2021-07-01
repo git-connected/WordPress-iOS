@@ -26,8 +26,10 @@ steps:
   #################
   - label: "🧪 Unit Tests"
     command: |
+      echo "--- 📦 Downloading Build Artifacts"
       buildkite-agent artifact download build-products.tar .
       tar -xf build-products.tar
+      echo "--- 🧪 Testing"
       bundle install
       bundle exec fastlane test_without_building name:WordPressUnitTests try_count:3
     depends_on: "build"
@@ -48,10 +50,12 @@ steps:
   #################
   - label: "🧪 UI Tests (iPhone)"
     command: |
+      echo "--- 📦 Downloading Build Artifacts"
       buildkite-agent artifact download build-products.tar .
       tar -xf build-products.tar
       bundle install
       bundle exec pod install
+      echo "--- 🧪 Testing"
       rake mocks &
       bundle exec fastlane test_without_building name:WordPressUITests try_count:3 device:"iPhone 11" ios-version:"14.1"
     depends_on: "build"
@@ -60,10 +64,12 @@ steps:
 
   - label: "🧪 UI Tests (iPad)"
     command: |
+      echo "--- 📦 Downloading Build Artifacts"
       buildkite-agent artifact download build-products.tar .
       tar -xf build-products.tar
       bundle install
       bundle exec pod install
+      echo "--- 🧪 Testing"
       rake mocks &
       bundle exec fastlane test_without_building name:WordPressUITests try_count:3 device:"iPad Air (4th generation)" ios-version:"14.1"
     depends_on: "build"
