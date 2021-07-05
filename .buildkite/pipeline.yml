@@ -34,6 +34,8 @@ steps:
       bundle install
       bundle exec fastlane test_without_building name:WordPressUnitTests try_count:3
     depends_on: "build"
+    env:
+      IMAGE_ID: macos-11-4-template-wip
 
   #################
   # Lint Translations
@@ -60,6 +62,8 @@ steps:
       rake mocks &
       bundle exec fastlane test_without_building name:WordPressUITests try_count:3 device:"iPhone 11" ios-version:"14.1"
     depends_on: "build"
+    env:
+      IMAGE_ID: macos-11-4-template-wip
 
   - label: "🧪 UI Tests (iPad)"
     command: |
@@ -72,3 +76,5 @@ steps:
       rake mocks &
       bundle exec fastlane test_without_building name:WordPressUITests try_count:3 device:"iPad Air (4th generation)" ios-version:"14.1"
     depends_on: "build"
+    env:
+      IMAGE_ID: macos-11-4-template-wip
