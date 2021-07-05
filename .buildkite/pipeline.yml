@@ -1,3 +1,7 @@
+# build-container: &build-container
+#   plugins:
+#     - file:///Users/jkmassel/Projects/mac-vm-buildkite-plugin:
+#         image: "macos-11-4-template-wip"
 
 # This is the default pipeline – it will build and test the app
 steps:
@@ -20,6 +24,8 @@ steps:
       echo "--- 🗜 Zip Build Products"
       tar -cf build-products.tar DerivedData/Build/Products/
       buildkite-agent artifact upload build-products.tar
+    env:
+      IMAGE_ID: macos-11-4-template-wip
 
   #################
   # Run Unit Tests
